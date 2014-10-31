@@ -1,11 +1,13 @@
 var superagent = require('superagent')
 var expect = require('expect.js')
+var port = process.env.PORT || 3000
+var baseUrl = 'http://localhost:'
 
 describe('express rest api server', function(){
   var id
 
   it('posts an object', function(done){
-    superagent.post('http://localhost:3000/collections/test')
+    superagent.post(baseUrl+port+'/collections/test')
       .send({ name: 'John'
         , email: 'john@rpjs.co'
       })
@@ -20,7 +22,7 @@ describe('express rest api server', function(){
   })
 
   it('retrieves an object', function(done){
-    superagent.get('http://localhost:3000/collections/test/'+id)
+    superagent.get(baseUrl+port+'/collections/test/'+id)
       .end(function(e, res){
         // console.log(res.body)
         expect(e).to.eql(null)
@@ -32,7 +34,7 @@ describe('express rest api server', function(){
   })
 
   it('retrieves a collection', function(done){
-    superagent.get('http://localhost:3000/collections/test')
+    superagent.get(baseUrl+port+'/collections/test')
       .end(function(e, res){
         // console.log(res.body)
         expect(e).to.eql(null)
@@ -43,7 +45,7 @@ describe('express rest api server', function(){
   })
 
   it('updates an object', function(done){
-    superagent.put('http://localhost:3000/collections/test/'+id)
+    superagent.put(baseUrl+port+'/collections/test/'+id)
       .send({name: 'Peter'
         , email: 'peter@yahoo.com'})
       .end(function(e, res){
@@ -56,7 +58,7 @@ describe('express rest api server', function(){
   })
 
   it('checks an updated object', function(done){
-    superagent.get('http://localhost:3000/collections/test/'+id)
+    superagent.get(baseUrl+port+'/collections/test/'+id)
       .end(function(e, res){
         // console.log(res.body)
         expect(e).to.eql(null)
@@ -68,7 +70,7 @@ describe('express rest api server', function(){
       })
   })
   it('removes an object', function(done){
-    superagent.del('http://localhost:3000/collections/test/'+id)
+    superagent.del(baseUrl+port+'/collections/test/'+id)
       .end(function(e, res){
         // console.log(res.body)
         expect(e).to.eql(null)
