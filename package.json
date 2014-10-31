@@ -1,0 +1,29 @@
+{
+  "name": "test-express",
+  "version": "0.0.1",
+  "description": "Test Node with Express on Docker - Dev env",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "mocha app.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/paraskakis/nodeapp"
+  },
+  "author": "Emmanuel Paraskakis",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/paraskakis/nodeapp/issues"
+  },
+  "dependencies": {
+    "mongoskin": "1.4.1",
+    "express": "4.8.1",
+    "body-parser": "1.0.2"
+  },
+  "devDependencies": {
+    "expect.js": "0.3.1",
+    "mocha": "1.18.2",
+    "superagent": "0.17.0"
+  }
+}
