@@ -62,7 +62,7 @@ app.get('/collections/:collectionName/:id', function(req, res, next) {
   })
 })
 
-
+//TODO: add error checking for 404 etc
 app.put('/collections/:collectionName/:id', function(req, res, next) {
 //   req.collection.findById(req.params.id, function(e, resource) {
 //     if (e)
@@ -77,11 +77,11 @@ app.put('/collections/:collectionName/:id', function(req, res, next) {
 //   })
 // })        
 
-console.log('Request Body: ', req.body)
+//console.log('Request Body: ', req.body)
 
   req.collection.findAndModify({_id: ObjectID(req.params.id)}, [['_id','asc']], {$set: req.body}, {new: true}, function(e, result){
-    console.log('Request ID: '+req.params.id)
-    console.log('Request Body2: ', req.body)
+    //console.log('Request ID: '+req.params.id)
+    //console.log('Request Body2: ', req.body)
 
   //req.collection.updateById(req.params.id, {$set: req.body}, {safe: true, multi: false}, function(e, result){
     if (e) return next(e)
