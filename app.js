@@ -7,6 +7,8 @@ app.use(bodyParser())
 
 var db = mongoskin.db(process.env.MONGO, {safe:true})
 
+ObjectID = mongoskin.ObjectID
+
 function logRequest(req, res) {
   console.log('----------------------------------------------------')
   console.log('Timestamp: '+Date())
@@ -23,7 +25,14 @@ app.param('collectionName', function(req, res, next, collectionName){
   req.collection = db.collection(collectionName)
   return next()
 })
-
+// app.use( function(req, res, next){
+//   req.collection = db.collection(collectionName)
+//   return next()
+// })
+// app.get('/', function(req, res) {
+//   res.send('please select a collection, e.g., /collections/messages')
+//   logRequest(req,res)
+// })
 app.get('/', function(req, res, next) {
   res.send('please select a collection, e.g., /collections/messages')
   logRequest(req,res)
@@ -68,7 +77,13 @@ app.put('/collections/:collectionName/:id', function(req, res, next) {
 //   })
 // })        
 
-  req.collection.updateById(req.params.id, {$set: req.body}, {safe: true, multi: false}, function(e, result){
+console.log('Request Body: ', req.body)
+
+  req.collection.findAndModify({_id: ObjectID(req.params.id)}, [['_id','asc']], {$set: req.body}, {new: true}, function(e, result){
+    console.log('Request ID: '+req.params.id)
+    console.log('Request Body2: ', req.body)
+
+  //req.collection.updateById(req.params.id, {$set: req.body}, {safe: true, multi: false}, function(e, result){
     if (e) return next(e)
     //if (result === 1) {
     //   res.send(req.body) //TODO return the actual representation, not the request body
@@ -76,8 +91,9 @@ app.put('/collections/:collectionName/:id', function(req, res, next) {
     // }
     // else
       // res.status(404).send({msg: 'Not found'}) //TODO: test for other errors
-    res.send((result === 1) ? {msg:'success'} : {msg: 'error'})
     console.log('Result: '+result)
+    res.send(result)
+    //res.send((result === 1) ? {msg:'success'} : {msg: 'error'})
   })
 })
 

@@ -17,9 +17,9 @@
     "url": "https://github.com/paraskakis/nodeapp/issues"
   },
   "dependencies": {
-    "mongoskin": "1.4.1",
+    "body-parser": "1.0.2",
     "express": "4.8.1",
-    "body-parser": "1.0.2"
+    "mongoskin": "^1.4.4"
   },
   "devDependencies": {
     "expect.js": "0.3.1",
