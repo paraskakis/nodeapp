@@ -1,13 +1,13 @@
-var express = require('express'),
-  mongoskin = require('mongoskin'),
-  bodyParser = require('body-parser')
+var express = require('express')
+var mongoskin = require('mongoskin')
+var bodyParser = require('body-parser')
 
 var app = express()
 app.use(bodyParser())
 
 var db = mongoskin.db(process.env.MONGO, {safe:true})
 
-ObjectID = mongoskin.ObjectID
+ObjectID = mongoskin.ObjectID //class
 
 function logRequest(req, res) {
   console.log('----------------------------------------------------')
